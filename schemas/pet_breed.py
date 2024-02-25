@@ -7,6 +7,10 @@ class PetBreedBase(BaseModel):
     pet_type_id: int
 
 
+class PetBreedCreate(PetBreedBase):
+    pass
+
+
 class PetBreed(PetBreedBase):
     id: int
 

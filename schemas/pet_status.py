@@ -6,6 +6,10 @@ class PetStatusBase(BaseModel):
     status: str
 
 
+class PetStatusCreate(PetStatusBase):
+    pass
+
+
 class PetStatus(PetStatusBase):
     id: int
 

@@ -6,6 +6,10 @@ class PetColorBase(BaseModel):
     color_name: str
 
 
+class PetColorCreate(PetColorBase):
+    pass
+
+
 class PetColor(PetColorBase):
     id: int
 
