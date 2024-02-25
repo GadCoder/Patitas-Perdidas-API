@@ -1,18 +1,30 @@
-from fastapi import Depends, FastAPI, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
+from db.session import engine 
+from db.base import Base     
 
-from database import SessionLocal, engine, Base
+from apis.base import api_router    
 
-Base.metadata.create_all(bind=engine)
+###
+
+def include_router(app):   
+	app.include_router(api_router)
+      
+def create_tables():         
+	Base.metadata.create_all(bind=engine)
+        
+
+def start_application():
+    app = FastAPI()
+    create_tables()
+    include_router(app)
+    return app
 
 
-app = FastAPI()
+app = start_application()
 
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+@app.get("/")
+def home():
+    return {"msg":"Hello FastAPI🚀"}
+
+

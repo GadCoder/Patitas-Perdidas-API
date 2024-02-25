@@ -1,10 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
-
-from database import Base
-
+from db.base_class import Base
 
 class PetBreed(Base):
-    __tablename__ = "pet_breeds"
-
     id = Column(Integer, primary_key=True)
     breed = Column(String)
+    pet_type_id = Column(Integer, ForeignKey("pettype.id"))

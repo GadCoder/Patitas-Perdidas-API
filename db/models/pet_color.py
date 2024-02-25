@@ -1,10 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from db.base_class import Base
 
-from database import Base
 
-
-class PetStatus(Base):
-    __tablename__ = "pet_status"
-
+class PetColor(Base):
     id = Column(Integer, primary_key=True)
-    status = Column(String)
+    color = Column(String)

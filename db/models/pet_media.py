@@ -1,11 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from db.base_class import Base
 
-from database import Base
-
-
-class PetColor(Base):
-    __tablename__ = "pet_media"
-
+class PetMedia(Base):
     id = Column(Integer, primary_key=True)
-    pet_id = Column(Integer, ForeignKey("pets.id"))
+    pet_id = Column(Integer, ForeignKey("pet.id"))
     media_url = Column(String)
