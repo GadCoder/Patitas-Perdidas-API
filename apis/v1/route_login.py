@@ -1,5 +1,7 @@
+from fastapi.responses import HTMLResponse
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi import Depends, APIRouter
+from fastapi import Depends, APIRouter, Request
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from fastapi import status, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
@@ -12,7 +14,14 @@ from schemas.token import Token
 from db.repository.login import get_user
 from core.security import create_access_token
 
+
+from typing import Annotated
+
+from fastapi import Form
+
+
 router = APIRouter()
+templates = Jinja2Templates(directory="templates")
 
 
 def authenticate_user(email: str, password: str,db: Session):
@@ -20,7 +29,7 @@ def authenticate_user(email: str, password: str,db: Session):
     print(user)
     if not user:
         return False
-    if not Hasher.verify_password(password, user.password):
+    if not Hasher.verify_password(password, user.hashed_password):
         return False
     return user
 
@@ -59,3 +68,25 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session= Depends(g
     if user is None:
         raise credentials_exception
     return user
+
+
+
+@router.post("/login/", response_class=HTMLResponse)
+async def login(request: Request, username: Annotated[str, Form()], password: Annotated[str, Form()], db: Session= Depends(get_db)):
+    user = authenticate_user(username, password, db=db)
+    if not user:
+          return templates.TemplateResponse(
+                request=request, name="login-error.html", context={
+                    "user": user
+                }
+            )
+    access_token = create_access_token(
+        data={"sub": user.email}
+    )
+
+    return templates.TemplateResponse(
+                request=request, name="homepage.html", context={
+                    "user": user.names,
+                    "access_token": access_token
+                }
+            )
