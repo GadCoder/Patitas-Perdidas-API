@@ -1,10 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from db.session import engine 
 from db.base import Base     
 
 from apis.base import api_router    
 
-###
+
+
 
 def include_router(app):   
 	app.include_router(api_router)
@@ -19,12 +22,14 @@ def start_application():
     include_router(app)
     return app
 
+templates = Jinja2Templates(directory="templates")
 
 app = start_application()
 
 
-@app.get("/")
-def home():
-    return {"msg":"Hello FastAPI🚀"}
-
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse(
+          request=request, name="index.html", context={}
+    )
 
