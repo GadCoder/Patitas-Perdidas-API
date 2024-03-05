@@ -44,7 +44,8 @@
                   type="text"
                   class="form-control"
                   placeholder="En caso cuente con un collar u otra manera de identificación"
-                  name="nombre-mascota"
+                  name="name"
+                  id="name"
                 />
               </div>
               <div class="row input-group mb-3">
@@ -52,8 +53,8 @@
                 <select
                   class="form-select"
                   aria-label="Default select example"
-                  name="tipo-mascota"
-                  id="tipo-mascota"
+                  name="tipo_mascota"
+                  id="tipo_mascota"
                 >
                   <option selected>Selecciona el tipo de mascota</option>
                   {% for pet_type in pet_types%}
@@ -97,14 +98,20 @@
               </div>
               <div class="row mb-3">
                 <label for="date">Fecha de desaparición</label>
-                <input type="date" name="date" id="date" />
+                <input type="date" name="fecha" id="fecha" />
               </div>
 
               <div class="row mb-3">
                 <label for="formFileMultiple" class="form-label"
                   >Agrege fotos o videos de la mascota</label
                 >
-                <input class="form-control" type="file" id="files" multiple />
+                <input
+                  class="form-control"
+                  type="file"
+                  id="files"
+                  name="files"
+                  multiple
+                />
               </div>
               <div class="row mb-3 input-group">
                 <label for="distrito">Distrito</label>

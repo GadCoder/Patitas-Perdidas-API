@@ -92,13 +92,22 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-4">
         <div class="container">
           <div class="row row-cols-12 row-cols-sm-2 row-cols-md-3">
             {% for dog in pets %}
             <div class="col container">
               <div class="row">
-                <img src="" alt="" />
+                {% if dog.id < pet_media | length %}
+                <img
+                  src="{{ pet_media[dog.id - 1].media_url }}"
+                  class="img-fluid"
+                  alt="{{ dog.name }}"
+                />
+
+                {% else %} <img src=""" class="img-fluid" alt="{{ dog.name }}"
+                /> {% endif %}
+
                 <!-- Image -->
               </div>
               <div class="row">
@@ -106,7 +115,10 @@
                 <!--Imagen-->
               </div>
               <div class="row">
-                <span>{{ dog.report_date }}</span>
+                <span
+                  >{{ dog.report_date.day }} / {{ dog.report_date.month }} / {{
+                  dog.report_date.year }}</span
+                >
                 <!--Fecha-->
               </div>
 

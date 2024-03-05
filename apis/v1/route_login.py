@@ -10,6 +10,7 @@ from jose import JWTError, jwt
 from core.config import settings
 from db.repository.pet import retrieve_all_pets
 from db.repository.pet_color import retrieve_all_pets_colors
+from db.repository.pet_media import retrieve_all_pet_media
 from db.repository.pet_type import retrieve_pets_type
 from db.session import get_db
 from core.hashing import Hasher
@@ -89,12 +90,15 @@ async def login(request: Request, username: Annotated[str, Form()], password: An
     pets = retrieve_all_pets(db)
     pets_type = retrieve_pets_type(db=db)
     pet_colors = retrieve_all_pets_colors(db=db)
+    pet_media = retrieve_all_pet_media(db=db)
 
     return templates.TemplateResponse(
                 request=request, name="homepage.html", context={
                     "user": user.names,
                     "access_token": access_token,
                     "pets": pets,
-                    "pets_colors": pet_colors
+                    "pets_colors": pet_colors,
+                    "pet_media": pet_media,
+                    "access_token": access_token
                 }
             )
