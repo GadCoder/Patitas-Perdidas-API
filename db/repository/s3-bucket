@@ -1,0 +1,32 @@
+import boto3
+import os
+from dotenv import load_dotenv
+
+from pathlib import Path
+
+from botocore.exceptions import NoCredentialsError
+
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+
+
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_BUCKET_NAME = os.getenv("AWS_BUCKET_NAME ")
+
+s3 = boto3.client('s3', 
+                  aws_access_key_id=AWS_ACCESS_KEY_ID,
+                  aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+
+async def upload_files(files):
+    results = []
+    try:
+        for file in files:
+            # Upload each file to S3 bucket
+            s3.upload_fileobj(file.file, AWS_BUCKET_NAME, file.filename)
+            results.append({"filename": file.filename, "status": "success", "message": "File uploaded successfully"})
+        return {"status": "success", "results": results}
+    except NoCredentialsError:
+        return {"status": "error", "message": "AWS credentials not available"}
+    except Exception as e:
+        return {"status": "error", "message": f"Failed to upload file: {str(e)}"}

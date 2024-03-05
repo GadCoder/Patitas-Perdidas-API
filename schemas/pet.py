@@ -4,8 +4,6 @@ from datetime import datetime
 
 class PetBase(BaseModel):
     name: Optional[str] = None
-    longitude: float
-    latitude: float
     district: str
     report_date: datetime
 

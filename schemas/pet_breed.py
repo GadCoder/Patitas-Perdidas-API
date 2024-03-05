@@ -2,8 +2,7 @@ from pydantic import BaseModel
 
 
 class PetBreedBase(BaseModel):
-    name: str
-    breed_name: str
+    breed: str
     pet_type_id: int
 
 

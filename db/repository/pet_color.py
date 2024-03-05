@@ -9,3 +9,8 @@ def create_new_pet_color(pet_color: PetColorCreate, db: Session):
     db.commit()
     db.refresh(pet_color)
     return pet_color
+
+
+def retrieve_all_pets_colors(db: Session):
+    pets_colors = db.query(PetColor).all()
+    return pets_colors

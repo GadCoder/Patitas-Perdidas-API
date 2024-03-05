@@ -8,6 +8,7 @@ from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import JWTError, jwt
 
 from core.config import settings
+from db.repository.pet import retrieve_all_pets
 from db.session import get_db
 from core.hashing import Hasher
 from schemas.token import Token
@@ -83,10 +84,12 @@ async def login(request: Request, username: Annotated[str, Form()], password: An
     access_token = create_access_token(
         data={"sub": user.email}
     )
+    pets = retrieve_all_pets(db)
 
     return templates.TemplateResponse(
                 request=request, name="homepage.html", context={
                     "user": user.names,
-                    "access_token": access_token
+                    "access_token": access_token,
+                    "pets": pets
                 }
             )

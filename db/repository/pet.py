@@ -7,8 +7,6 @@ from db.models.pet import Pet
 def create_new_pet(pet:PetCreate, db: Session):
     pet = Pet(
         name=pet.name,
-        longitude=pet.longitude,
-        latitude=pet.latitude,
         district=pet.district,
         report_date=pet.report_date,
         breed_id=pet.breed_id,
@@ -27,4 +25,7 @@ def retrieve_pets_from_user(user_id: int, db: Session):
     pets = db.query(Pet).filter(Pet.user_id == user_id).all()
     return pets
 
+def retrieve_all_pets(db: Session):
+    pets = db.query(Pet).all()
+    return pets
     

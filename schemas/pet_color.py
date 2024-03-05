@@ -2,8 +2,7 @@ from pydantic import BaseModel
 
 
 class PetColorBase(BaseModel):
-    name: str
-    color_name: str
+    color: str
 
 
 class PetColorCreate(PetColorBase):

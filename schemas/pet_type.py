@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class PetTypeBase(BaseModel):
-    name: str
     description: str
 
 

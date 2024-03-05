@@ -10,3 +10,9 @@ def create_new_pet_status(pet_status: PetStatusCreate, db: Session):
     db.commit()
     db.refresh(pet_status)
     return pet_status
+
+
+def retrieve_all_pet_status(db: Session):
+    pet_status = db.query(PetStatus).all()
+    return pet_status
+

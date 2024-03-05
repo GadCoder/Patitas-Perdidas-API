@@ -10,17 +10,112 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <style>
+      .headers {
+        color: #ff3d00;
+      }
+      .login-form-input {
+        width: 50%;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <h1>Home</h1>
-          <a href="/logout/">Cerrar sesión</a>
+      <div class="row mb-3">
+        <div class="row">
+          <h1 class="headers">Patitas perdidas</h1>
+        </div>
+        <div class="row">
+          <a href="/login-page/">Cerrar sesión</a>
         </div>
       </div>
       <div class="row">
         <h3>Bienvenido, {{ user }}</h3>
+      </div>
+      <div class="row container">
+        <div class="col-12 col-md-8">
+          <div
+            class="row d-flex align-items-center mb-3 d-flex justify-content-between"
+          >
+            <div class="col-6">
+              <div class="form-outline" data-mdb-input-init>
+                <input
+                  type="search"
+                  id="form1"
+                  class="form-control"
+                  style="border: 1px solid #f68966"
+                  placeholder="Buscar mascota por nombre"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-mdb-ripple-init
+                style="background-color: #f68966; border: 1px solid #f68966"
+              >
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <a href="/register-page">
+            <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+              Registrar mascota
+            </button>
+          </a>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-2 col-md-3">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Tipo</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Raza</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Fecha</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Distrito</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+          <div class="row row-cols-12 row-cols-sm-2 row-cols-md-3">
+            {% for photo in photos %}
+            <div class="col container">
+              <div class="row">
+                <!-- Image -->
+              </div>
+              <div class="row">
+                <!--Imagen-->
+              </div>
+              <div class="row">
+                <!--Fecha-->
+              </div>
+              <div class="row">
+                <!--Descripción-->
+              </div>
+              <div class="row">
+                <!--Seguir leyendo-->
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
   </body>

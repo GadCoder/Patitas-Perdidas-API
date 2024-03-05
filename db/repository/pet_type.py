@@ -9,3 +9,8 @@ def create_new_pet_type(pet_type: PetType, db: Session):
     db.commit()
     db.refresh(pet_type)
     return pet_type
+
+
+def retrieve_pets_type(db: Session):
+    pets_type = db.query(PetType).all()
+    return pets_type
