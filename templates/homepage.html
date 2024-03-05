@@ -95,21 +95,23 @@
       <div class="row">
         <div class="container">
           <div class="row row-cols-12 row-cols-sm-2 row-cols-md-3">
-            {% for photo in photos %}
+            {% for dog in pets %}
             <div class="col container">
               <div class="row">
+                <img src="" alt="" />
                 <!-- Image -->
               </div>
               <div class="row">
+                <h3>{{ dog.name }}</h3>
                 <!--Imagen-->
               </div>
               <div class="row">
+                <span>{{ dog.report_date }}</span>
                 <!--Fecha-->
               </div>
+
               <div class="row">
-                <!--Descripción-->
-              </div>
-              <div class="row">
+                <span>Color: {{ (pets_colors | random).color}}</span>
                 <!--Seguir leyendo-->
               </div>
             </div>
